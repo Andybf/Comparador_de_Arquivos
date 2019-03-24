@@ -17,7 +17,7 @@ void ajuda(){
     printf("Uso incorreto do programa detectado!\n    Exemplo: \n");
     printf("    ./comparador /pasta1/pasta2/arquivo.ext /pasta3/pasta4/arquivo2.ext \n\n");
     
-    printf(" - Tamanho máximo permitido por arquivo: 16.777.216 bytes (16MB).\n");
+    printf(" - Tamanho máximo permitido por arquivo: 4.294.967.295 bytes (4096 Megabytes).\n");
     printf(" - Você pode arrastar e soltar os arquivos para dentro do terminal para adicioná-los.\n");
     separador(0,1);
     exit(0);
