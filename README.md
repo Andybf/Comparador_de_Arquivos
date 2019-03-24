@@ -18,4 +18,12 @@ Abra o terminal (Bash) do seu computador, navegue para dentro da pasta onde se l
 
 ## Execução do programa ## 
 
-`$ ./comparador /pasta1/pasta2/arquivo.ext /pasta3/pasta4/arquivo2.ext`
+Para executar o programa corretamente, referencie o caminho dos dois arquivos a serem comparados separando-os por espaços.
+Exemplo:
+
+`$ ./exe /pasta1/pasta2/arquivo.ext /pasta3/pasta4/arquivo2.ext`
+
+## Observações ## 
+
+tamanho máximo recomendado por arquivo:
+* 4.294.967.295 bytes (4096 Megabytes)
