@@ -16,6 +16,14 @@ int separador(int,int);
 int count(int);
 int negToPos(int);
 
+//decimal para hexadecimal
 char* decToHex(int);
+
+//cores
+void red(void);
+void yellow(void);
+void green(void);
+void blue(void);
+void white(void);
 
 #endif /* comparador_h */

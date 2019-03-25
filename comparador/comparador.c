@@ -28,13 +28,16 @@ int main(int argc, char** argv){
         if ((arq[c-1] = fopen(argv[c],"r"))){
             printf("%dº arquivo: %s \n",c,argv[c]);
         } else {
-            printf("\033[1;31mERRO: \033[0m");
+            red();
+            printf("ERRO:");
+            white();
             printf("Não foi possível localizar o %dº arquivo! Você digitou certo?\n",c);
             exit(0);
         }
     }
     
     separador(0,1);
+    
     
     //pega o tamanho dos arquivos
     unsigned int tamArq[2];
@@ -47,9 +50,9 @@ int main(int argc, char** argv){
     int difbytes = (tamArq[0] - tamArq[1]);
     
     if (tamArq[0] > MAXBYTES || tamArq[1] > MAXBYTES){
-        printf("\033[1;31m");
+        red();
         printf("AVISO: ");
-        printf("\033[0m");
+        white();
         printf("O programa só consegue endereçar até 2^32 bytes, ou seja, até %li bytes (4096 Megabytes)",MAXBYTES);
         separador(1, 1);
     }
@@ -67,13 +70,18 @@ int main(int argc, char** argv){
     printf("Tamanho dos arquivos:\n");
     printf("┌--------------┬-------------------------┐\n");
     if (maiorArquivo == 2) {
-        printf("|  2º Arquivo  | ");formatador(tamArq[0]);
-        printf("|  1º Arquivo  | ");formatador(tamArq[1]);
+        printf("|  2º Arquivo  | ");
+        formatador(tamArq[0]);
+        printf("|  1º Arquivo  | ");
+        formatador(tamArq[1]);
     } else {
-        printf("|  1º Arquivo  | ");formatador(tamArq[0]);
-        printf("|  2º Arquivo  | ");formatador(tamArq[1]);
+        printf("|  1º Arquivo  | ");
+        formatador(tamArq[0]);
+        printf("|  2º Arquivo  | ");
+        formatador(tamArq[1]);
     }
-    printf("|  Diferença   | ");formatador(negToPos(difbytes));
+    printf("|  Diferença   | ");
+    formatador(negToPos(difbytes));
     printf("├--------------┴-------------------------┤\n");
     if (tamArq[0] == tamArq[1]) {
         printf("|  Os arquivos possuem o mesmo tamanho!  |\n");
@@ -102,7 +110,7 @@ int main(int argc, char** argv){
     fclose(arq[1]);
     
     //imprime o cabeçalho da tabela
-    printf("Conteúdo dos Arquivos:\n");
+    printf("Conteúdo dos Arquivos: (Em hexadecimal)\n");
     printf("┌--------------┬------------┬------------┐\n");
     printf("|   Endereço   | 1º Arquivo | 2º Arquivo |\n");
     printf("├--------------┼------------┼------------┤\n");
@@ -134,10 +142,15 @@ int main(int argc, char** argv){
     }
     printf("└----------------------------------------┘\n");
     
+    printf("Status: ");
+    green();
+    printf("Finalizado!\n");
+    white();
     t = clock() - t;
     double ttaken = ((double)t)/CLOCKS_PER_SEC; // in seconds
+    printf("Tempo de execução: %.2f segundos\n",ttaken);
     
-    printf("%f",ttaken);
+    separador(0, 1);
     
     return 0;
 }

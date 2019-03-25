@@ -10,6 +10,7 @@
 #define formatBytes_h
 
 #include <stdio.h>
+#include <locale.h>
 
 int formatador(int);
 int count(int);

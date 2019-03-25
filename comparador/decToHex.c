@@ -6,9 +6,7 @@
 //  Copyright © 2019 Anderson Bucchianico. All rights reserved.
 //
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "decToHex.h"
 
 //Converte numeros decimais para código hexadecimal em maiúsculas
 
@@ -17,11 +15,6 @@
  *  que se retorne uma string ao invés de aprenas um caractere.
  *  É necessario declarar a variavel de retorno como static, para
  *  que o conteúdo dela seja acessado mesmo após o término da função
-*/
-
-/* Exemplo de uso:
- *      char *h = decToHex('o');
- *      printf("%s \n",h);
 */
 
 unsigned char* decToHex(unsigned int numero){
