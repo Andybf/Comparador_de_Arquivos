@@ -10,9 +10,9 @@
 
 void ajuda(){
     printf("Escrito totalmente em C por:\n    Anderson Bucchianico\n");
-    printf("    24 de março de 2019 \n\n");
+    printf("    27 de março de 2019 \n\n");
     
-    printf("Versão:\n    Final 1.0 (MacOS)\n\n");
+    printf("Versão:\n    Final 1.1 \n\n");
     
     printf("Uso incorreto do programa detectado!\n    Exemplo: \n");
     printf("    ./comparador /pasta1/pasta2/arquivo.ext /pasta3/pasta4/arquivo2.ext \n\n");
@@ -41,3 +41,4 @@ int negToPos(int num){
         return num;
     }
 }
+

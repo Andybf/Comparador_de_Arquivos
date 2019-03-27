@@ -3,10 +3,10 @@
 #include "comparador.h"
 
 //começo do programa
-int main(int argc, char** argv){
+int main (int argc, char** argv) {
     
-    clock_t t;
-    t = clock();
+    //usado para medir o tempo de execução do programa
+    clock_t tempoExecucao = clock();
     
     separador(0,1);
     printf("Comparador de Arquivos");
@@ -20,12 +20,13 @@ int main(int argc, char** argv){
             ajuda();
     }
     
+    //variavel usada como contador para os laços de repetição
     unsigned int c;
     
     //tenta abrir e informa os arquivos que foram abertos
     FILE *arq[2]; //cria as variaveis de arquivo
     for (c=1; c<=2; c++) {
-        if ((arq[c-1] = fopen(argv[c],"r"))){
+        if ((arq[c-1] = fopen(argv[c],"r"))) {
             printf("%dº arquivo: %s \n",c,argv[c]);
         } else {
             red();
@@ -38,18 +39,17 @@ int main(int argc, char** argv){
     
     separador(0,1);
     
-    
-    //pega o tamanho dos arquivos
+    //pega o tamanho dos arquivos e calcula a diferença entre eles
     unsigned int tamArq[2];
-    for(c=0; c<=1; c++){ // faz duas vezes
-        while ((getc(arq[c])) != EOF){
-            tamArq[c]++;
-        }
-        rewind(arq[c]); //rebobinar o ponteiro para o começo do arquivo
-    }
-    int difbytes = (tamArq[0] - tamArq[1]);
+    struct stat sb;
     
-    if (tamArq[0] > MAXBYTES || tamArq[1] > MAXBYTES){
+    for(c=1; c<=2; c++){ // faz duas vezes
+        if (stat(argv[c],&sb) != -1) {
+            tamArq[c-1] = (int) sb.st_size;
+        }
+    }
+    
+    if (tamArq[0] > MAXBYTES || tamArq[1] > MAXBYTES) {
         red();
         printf("AVISO: ");
         white();
@@ -81,7 +81,7 @@ int main(int argc, char** argv){
         formatador(tamArq[1]);
     }
     printf("|  Diferença   | ");
-    formatador(negToPos(difbytes));
+    formatador(negToPos(tamArq[0] - tamArq[1]));
     printf("├--------------┴-------------------------┤\n");
     if (tamArq[0] == tamArq[1]) {
         printf("|  Os arquivos possuem o mesmo tamanho!  |\n");
@@ -92,7 +92,7 @@ int main(int argc, char** argv){
     
     separador(1,1);
     
-    //cria vetores dinamicamente para cada arquivo
+    //aloca espaço na memoria criando vetores dinamicamente para cada arquivo
     unsigned char* ch1 = (unsigned char*) malloc(tamArq[0] * sizeof(char));
     unsigned char* ch2 = (unsigned char*) malloc(tamArq[1] * sizeof(char));
     
@@ -117,12 +117,12 @@ int main(int argc, char** argv){
     
     //verificando se são iguais
     int charDif = 0;
-    for (c=0; c<tamArq[0]; c++) {
+    for (c=0; c<tamArq[1]; c++) {
         if (ch1[c] != ch2[c]) {
             charDif++;
             printf("|  0x%s  ",decToHex(c));
-            printf("|     %s     ",&decToHex(ch1[c])[6]); //retorna o caractere formatado a partir da 4ª posição
-            printf("|     %s     |\n",&decToHex(ch2[c])[6]);
+            printf("|     %s     ",&decToHex(ch1[c]) [6]); //retorna o caractere formatado a partir da 4ª posição
+            printf("|     %s     |\n",&decToHex(ch2[c]) [6]);
         }
     }
     //Imprime o rodapé
@@ -146,9 +146,9 @@ int main(int argc, char** argv){
     green();
     printf("Finalizado!\n");
     white();
-    t = clock() - t;
-    double ttaken = ((double)t)/CLOCKS_PER_SEC; // in seconds
-    printf("Tempo de execução: %.2f segundos\n",ttaken);
+    
+    tempoExecucao = clock() - tempoExecucao;
+    printf("Tempo de execução: %.2f segundos\n",( (double) tempoExecucao ) / CLOCKS_PER_SEC );
     
     separador(0, 1);
     

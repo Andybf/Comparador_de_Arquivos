@@ -18,17 +18,20 @@ int separador (int start, int end) {
     int col = w.ws_col /2;
     
     int c;
-    if(col > 60){
+    if (col == 0) {
+        col = 40;
+    }
+    if (col > 60) {
         col = 60;
     }
     
-    if(start == 1){//aplica uma quebra de linha no começo
+    if (start == 1) { //aplica uma quebra de linha no começo
         printf("\n");
     }
-    for (c=1; c<=col; c++){//aplica o separador
+    for (c=1; c<=col; c++) { //aplica o separador
         printf("- ");;
     }
-    if(end == 1){
+    if (end == 1) {
         printf("\n");
     }
     

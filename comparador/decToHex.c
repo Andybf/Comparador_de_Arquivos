@@ -17,7 +17,7 @@
  *  que o conteúdo dela seja acessado mesmo após o término da função
 */
 
-unsigned char* decToHex(unsigned int numero){
+unsigned char* decToHex(unsigned int numero) {
     
     static unsigned char hex[9];
     unsigned int resto[8];

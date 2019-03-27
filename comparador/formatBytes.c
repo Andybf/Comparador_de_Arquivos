@@ -38,7 +38,7 @@ int formatador(int op){
             printf("        %d bytes |\n",op);
             break;
         default:
-            for(int c=0; c<=15; c++){
+            for (int c=0; c<=15; c++) {
                 printf(" ");
             }
             printf("0 bytes |\n");
