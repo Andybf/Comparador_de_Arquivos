@@ -21,11 +21,11 @@ Abra o terminal (Bash) do seu computador, navegue para dentro da pasta onde se l
 Para executar o programa corretamente, referencie o caminho dos dois arquivos a serem comparados separando-os por espaços.
 Exemplo:
 
-`$ ./exe /pasta1/pasta2/arquivo.ext /pasta3/pasta4/arquivo2.ext`
+`$ ./comparador /pasta1/pasta2/arquivo.ext /pasta3/pasta4/arquivo2.ext`
 
 Você também pode salvar os resultados para dentro de um arquivo executando o programa da seguinte forma:
 
-`$ ./exe /pasta1/pasta2/arquivo.ext /pasta3/pasta4/arquivo2.ext > log.txt`
+`$ ./comparador /pasta1/pasta2/arquivo.ext /pasta3/pasta4/arquivo2.ext > log.txt`
 
 ## Observações ## 
 
