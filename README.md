@@ -5,7 +5,8 @@ Linguagem Usada:
 * C
   
 Sistema Operacional:
-* Testado apenas no macOS Mojave 10.14.3
+* Testado no macOS Mojave 10.14.3;
+* Testado no Linux Ubuntu 18.10.
   
 IDE:
 * Xcode 10.1
