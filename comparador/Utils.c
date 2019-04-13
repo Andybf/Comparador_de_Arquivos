@@ -6,6 +6,8 @@
 //  Copyright © 2019 Anderson Bucchianico. All rights reserved.
 //
 
+//Biblioteca de funções pessoal, usada no programa principal.
+
 #include "Utils.h"
 
 void ajuda(){
