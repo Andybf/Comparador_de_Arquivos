@@ -3,9 +3,10 @@
 #ifndef Main_h
 #define Main_h
 
-#include <stdio.h> //Biblioteca para E/S
-#include <string.h> //Manipulação de Strings
-#include <time.h>
+//Definição de bibliotecas do C
+#include <stdio.h>      // Biblioteca para E/S
+#include <string.h>.    // Manipulação de Strings
+#include <time.h>       // Usado para contar o tempo de execução
 #include <sys/types.h>
 #include <fcntl.h>
 #include <sys/mman.h>
@@ -18,7 +19,7 @@
 //Variaveis macro
 #define MAXBYTES 4294967295
 
-//utils
+//Definição de funções da biblioteca Utils
 void ajuda(void);
 int espacamento(int,int);
 int separador(int,int);
@@ -26,7 +27,7 @@ int count(int);
 int negToPos(int);
 char* decToHex(int);
 
-//cores
+//Definição de cores
 void red(void);
 void yellow(void);
 void green(void);
