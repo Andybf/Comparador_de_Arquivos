@@ -63,15 +63,15 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "/a/olandMod.rom"
+            argument = "/a/OlandEFI.rom"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "/a/OlandOriginal.rom"
+            argument = "/a/OlandUEFI.rom"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "/a/afuwin.rom"
+            argument = "-x"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument

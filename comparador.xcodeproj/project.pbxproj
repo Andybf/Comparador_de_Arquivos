@@ -7,12 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		71218BB72246F9860090ED9E /* decToHex.c in Sources */ = {isa = PBXBuildFile; fileRef = 71218BB62246F9860090ED9E /* decToHex.c */; };
-		71218BBC224729860090ED9E /* separador.c in Sources */ = {isa = PBXBuildFile; fileRef = 71218BBB224729860090ED9E /* separador.c */; };
-		71218BBF22472A230090ED9E /* formatBytes.c in Sources */ = {isa = PBXBuildFile; fileRef = 71218BBE22472A230090ED9E /* formatBytes.c */; };
 		71218BC222472AB20090ED9E /* Utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 71218BC122472AB20090ED9E /* Utils.c */; };
-		7166B80E2247FEC000DEBD22 /* Cores.c in Sources */ = {isa = PBXBuildFile; fileRef = 7166B80D2247FEC000DEBD22 /* Cores.c */; };
-		71876B3A2243EC8B00D24C67 /* comparador.c in Sources */ = {isa = PBXBuildFile; fileRef = 71876B392243EC8B00D24C67 /* comparador.c */; };
+		717710A42260528200AEEB02 /* Main.c in Sources */ = {isa = PBXBuildFile; fileRef = 717710A32260528200AEEB02 /* Main.c */; };
+		717710A7226052AA00AEEB02 /* Colors.c in Sources */ = {isa = PBXBuildFile; fileRef = 717710A6226052AA00AEEB02 /* Colors.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,19 +25,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		71218BB62246F9860090ED9E /* decToHex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = decToHex.c; sourceTree = "<group>"; };
-		71218BBA224729860090ED9E /* separador.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = separador.h; sourceTree = "<group>"; };
-		71218BBB224729860090ED9E /* separador.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = separador.c; sourceTree = "<group>"; };
-		71218BBD22472A230090ED9E /* formatBytes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = formatBytes.h; sourceTree = "<group>"; };
-		71218BBE22472A230090ED9E /* formatBytes.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = formatBytes.c; sourceTree = "<group>"; };
 		71218BC022472AB20090ED9E /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		71218BC122472AB20090ED9E /* Utils.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Utils.c; sourceTree = "<group>"; };
-		7166B80C2247FEC000DEBD22 /* Cores.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cores.h; sourceTree = "<group>"; };
-		7166B80D2247FEC000DEBD22 /* Cores.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Cores.c; sourceTree = "<group>"; };
-		7166B80F22480E0100DEBD22 /* decToHex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = decToHex.h; sourceTree = "<group>"; };
+		717710A32260528200AEEB02 /* Main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Main.c; sourceTree = "<group>"; };
+		717710A52260528C00AEEB02 /* Colors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Colors.h; sourceTree = "<group>"; };
+		717710A6226052AA00AEEB02 /* Colors.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Colors.c; sourceTree = "<group>"; };
+		717710A8226052B200AEEB02 /* Main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Main.h; sourceTree = "<group>"; };
 		71876B2E2243EC6700D24C67 /* comparador */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = comparador; sourceTree = BUILT_PRODUCTS_DIR; };
-		71876B382243EC8B00D24C67 /* comparador.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = comparador.h; sourceTree = "<group>"; };
-		71876B392243EC8B00D24C67 /* comparador.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = comparador.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,18 +64,12 @@
 		71876B302243EC6700D24C67 /* comparador */ = {
 			isa = PBXGroup;
 			children = (
-				71876B382243EC8B00D24C67 /* comparador.h */,
-				71876B392243EC8B00D24C67 /* comparador.c */,
-				7166B80C2247FEC000DEBD22 /* Cores.h */,
-				7166B80D2247FEC000DEBD22 /* Cores.c */,
+				717710A8226052B200AEEB02 /* Main.h */,
+				717710A32260528200AEEB02 /* Main.c */,
+				717710A52260528C00AEEB02 /* Colors.h */,
+				717710A6226052AA00AEEB02 /* Colors.c */,
 				71218BC022472AB20090ED9E /* Utils.h */,
 				71218BC122472AB20090ED9E /* Utils.c */,
-				71218BBD22472A230090ED9E /* formatBytes.h */,
-				71218BBE22472A230090ED9E /* formatBytes.c */,
-				7166B80F22480E0100DEBD22 /* decToHex.h */,
-				71218BB62246F9860090ED9E /* decToHex.c */,
-				71218BBA224729860090ED9E /* separador.h */,
-				71218BBB224729860090ED9E /* separador.c */,
 			);
 			path = comparador;
 			sourceTree = "<group>";
@@ -129,6 +114,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 71876B252243EC6700D24C67;
 			productRefGroup = 71876B2F2243EC6700D24C67 /* Products */;
@@ -145,12 +131,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7166B80E2247FEC000DEBD22 /* Cores.c in Sources */,
-				71218BBC224729860090ED9E /* separador.c in Sources */,
-				71876B3A2243EC8B00D24C67 /* comparador.c in Sources */,
-				71218BBF22472A230090ED9E /* formatBytes.c in Sources */,
+				717710A42260528200AEEB02 /* Main.c in Sources */,
 				71218BC222472AB20090ED9E /* Utils.c in Sources */,
-				71218BB72246F9860090ED9E /* decToHex.c in Sources */,
+				717710A7226052AA00AEEB02 /* Colors.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
