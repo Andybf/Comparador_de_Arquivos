@@ -5,7 +5,7 @@
 
 //Definição de bibliotecas do C
 #include <stdio.h>      // Biblioteca para E/S
-#include <string.h>.    // Manipulação de Strings
+#include <string.h>     // Manipulação de Strings
 #include <time.h>       // Usado para contar o tempo de execução
 #include <sys/types.h>
 #include <fcntl.h>
