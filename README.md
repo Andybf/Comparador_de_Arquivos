@@ -10,6 +10,7 @@ Linguagem Usada:
 Sistema Operacional:
 * macOS Mojave 10.14.3 
 * Linux Ubuntu 18.10
+* Pode ser portado para Windows também, embora isso ainda não foi testado.
   
 IDE:
 * Xcode 10.1
