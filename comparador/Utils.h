@@ -9,6 +9,7 @@
 #ifndef Utils_h
 #define Utils_h
 
+//Inclusão de bibliotecas do C
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/ioctl.h>
@@ -17,6 +18,7 @@
 //Variaveis macro
 #define MAXBYTES 4294967295
 
+//Definição de funções do arquivo
 void ajuda(void);
 int count(int);
 int negToPos(int);
@@ -24,7 +26,7 @@ void separador(int,int);
 void espacamento(int,int);
 unsigned char* decToHex(unsigned int);
 
-//cores
+//definição de cores
 void red(void);
 void yellow(void);
 void green(void);
