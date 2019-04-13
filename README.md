@@ -7,9 +7,11 @@ Interface:
 Linguagem Usada:
 * C
   
-Sistema Operacional:
-* macOS Mojave 10.14.3 
+Sistema Operacionais testados:
+* macOS Mojave 10.14.4
+* iOS 11.4.1
 * Linux Ubuntu 18.10
+
 * Pode ser portado para Windows também, embora isso ainda não foi testado.
   
 IDE:
