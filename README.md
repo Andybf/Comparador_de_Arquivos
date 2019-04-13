@@ -1,6 +1,9 @@
 # Comparador_de_Arquivos
 Compara dois arquivos referenciados pelo usuário e mostra em tabelas quantos e quais bytes quais são diferentes entre eles.
 
+Interface:
+* Linha de Comando (CLI)
+
 Linguagem Usada:
 * C
   
