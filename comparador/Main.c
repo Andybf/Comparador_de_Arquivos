@@ -102,7 +102,7 @@ int main (int argc, char** argv) {
     }
     printf("|  Diferença   | ");
     espacamento(tamArq[0] - tamArq[1], 16);
-    printf(" %d bytes |\n",negToPos(tamArq[0] - tamArq[1]));
+    printf(" %d bytes |\n",negToPosi(tamArq[0] - tamArq[1]));
     
     printf("├--------------┴-------------------------┤\n");
     if (tamArq[0] == tamArq[1]) {
@@ -167,7 +167,7 @@ int main (int argc, char** argv) {
     printf("| Taxa de Originalidade: ");
     float txOrig = 100-((float)(charDif*100)/tamArq[1]);
     espacamento(txOrig, 10);
-    printf("%.3f%c |\n",txOrig,37);
+    printf("%.3f%c |\n",negToPosf(txOrig),37);
     
     printf("└----------------------------------------┘\n");
     

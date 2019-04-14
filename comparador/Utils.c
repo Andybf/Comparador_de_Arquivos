@@ -39,12 +39,20 @@ int count(int num){
 }
 
 //Transforma o numero negativo para positivo
-int negToPos(int num){
+int negToPosi(int num){ //para numeros inteiros
     if (num < 0){
         return num -= num + num;
     } else {
         return num;
     }
+}
+float negToPosf(float num) { //para numeros com casas decimais
+    if (num < 0){
+        return num -= num + num;
+    } else {
+        return num;
+    }
+    return num;
 }
 
 //aplica espaços nas tabelas para manter a formatação

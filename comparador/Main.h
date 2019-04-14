@@ -20,12 +20,13 @@
 #define MAXBYTES 4294967295
 
 //Definição de funções da biblioteca Utils
-void ajuda(void);
-int espacamento(int,int);
-int separador(int,int);
-int count(int);
-int negToPos(int);
-char* decToHex(int);
+void            ajuda        (void);
+int             count        (int);
+int             negToPosi    (int);
+float           negToPosf    (float);
+void            separador    (int,int);
+void            espacamento  (int,int);
+unsigned char*  decToHex     (unsigned int);
 
 //Definição de cores
 void red(void);
