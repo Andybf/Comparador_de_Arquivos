@@ -8,7 +8,7 @@ int main (int argc, char** argv) {
     clock_t tempoExecucao = clock();
 
     separador(0,1);
-    printf("Comparador de Arquivos\n");
+    printf("Comparador de Arquivos\n\n");
     
     int OpcaoSemHex = 0;
     
@@ -34,7 +34,7 @@ int main (int argc, char** argv) {
     FILE *arq[2]; //cria as variaveis de arquivo
     for (c=1; c<=2; c++) {
         if ((arq[c-1] = fopen(argv[c],"r"))) {
-            printf("\n%dº arquivo: %s \n",c,argv[c]);
+            printf("%dº arquivo: %s \n",c,argv[c]);
         } else {
             red();
             printf("\nERRO:");
@@ -46,11 +46,11 @@ int main (int argc, char** argv) {
     
     //cria o vetor tamanho do Arquivo de 2 posições, guarda o tamanho de cada arquivo
     unsigned int tamArq[2];
-    struct stat infoArq;
+    struct stat infoArq[2];
     
-    for(c=1; c<=2; c++){ // faz duas vezes
-        if (stat(argv[c],&infoArq) != -1) {
-            tamArq[c-1] = (int) infoArq.st_size;
+    for(c=0; c<2; c++){ // pega o tamanho do arquivo
+        if (stat(argv[c+1],&infoArq[c]) == 0) {
+            tamArq[c] = (int) infoArq[c].st_size;
         }
     }
     
@@ -70,6 +70,63 @@ int main (int argc, char** argv) {
         white();
         printf("Você está pedido para comparar arquivos iguais que possuem o mesmo nome e caminho, logicamente o resultado será zero.\n");
     }
+    
+    //Mostra e compara as permissões de arquivo
+    char words[4][5] = {
+        {'r','e','a','d','\0'},
+        {'w','r','t','e','\0'},
+        {'e','x','e','c','\0'},
+        {' ','-','-',' ','\0'},
+    };
+    printf("\nPermissões dos Arquivos: \n");
+    printf("           ┌--------------------┬--------------------┐\n");
+    printf("           |     1º Arquivo     |     2º Arquivo     |\n");
+    printf("┌----------┼--------------------┼--------------------┤\n");
+    printf("| Usuario  |   ");
+    for (c=0; c<2; c++) {
+        printf( "%s ", (infoArq[c].st_mode & S_IRUSR) ? words[0] : words[3]);
+        printf( "%s ", (infoArq[c].st_mode & S_IWUSR) ? words[1] : words[3]);
+        printf( "%s ", (infoArq[c].st_mode & S_IXUSR) ? words[2] : words[3]);
+        printf("  |   ");
+    }
+    printf("\n| Grupo    |   ");
+    for (c=0; c<2; c++) {
+        printf( "%s ", (infoArq[c].st_mode & S_IRGRP) ? words[0] : words[3]);
+        printf( "%s ", (infoArq[c].st_mode & S_IWGRP) ? words[1] : words[3]);
+        printf( "%s ", (infoArq[c].st_mode & S_IXGRP) ? words[2] : words[3]);
+        printf("  |   ");
+    }
+    printf("\n| Outros   |   ");
+    for (c=0; c<2; c++) {
+        printf( "%s ", (infoArq[c].st_mode & S_IROTH) ? words[0] : words[3]);
+        printf( "%s ", (infoArq[c].st_mode & S_IWOTH) ? words[1] : words[3]);
+        printf( "%s ", (infoArq[c].st_mode & S_IXOTH) ? words[2] : words[3]);
+        printf("  |   ");
+    }
+    printf("\n└----------┴--------------------┴--------------------┘\n");
+    
+    char data[10];
+    //Mostra e compara datas de criação, modificação e último acesso
+    printf("\nHistórico dos Arquivos:\n");
+    printf("           ┌--------------------┬--------------------┐\n");
+    printf("           |     1º Arquivo     |     2º Arquivo     |\n");
+    printf("┌----------┼--------------------┼--------------------┤\n");
+    printf("| Criado   | ");
+    for (c=0; c<2; c++) {
+        strftime(data, 20, "%d/%m/%y  %H:%M:%S", localtime(&(infoArq[c].st_birthtime)));
+        printf("%s | ",data);
+    }
+    printf("\n| Acessado | ");
+    for (c=0; c<2; c++) {
+        strftime(data, 20, "%d/%m/%y  %H:%M:%S", localtime(&(infoArq[c].st_atime)));
+        printf("%s | ",data);
+    }
+    printf("\n| Alterado | ");
+    for (c=0; c<2; c++) {
+        strftime(data, 20, "%d/%m/%y  %H:%M:%S", localtime(&(infoArq[c].st_mtime)));
+        printf("%s | ",data);
+    }
+    printf("\n└----------┴--------------------┴--------------------┘\n");
     
     //deixa o 1º arquivo como sendo o maior em tamanho
     int maiorArquivo = 1;
