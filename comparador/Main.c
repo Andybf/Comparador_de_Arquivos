@@ -45,19 +45,19 @@ int main (int argc, char** argv) {
         ajuda();
     }
     for (c=1; c<argc-2; c++) {
-        if         (strcmp(argv[c],PERMISSOES)  == 0) {
+        if      (strcmp(argv[c],PERMISSOES) == 0) {
             opcoesAtivadas[0] = 1;
         }
-        else if    (strcmp(argv[c],HISTORICO)   == 0) {
+        else if (strcmp(argv[c],HISTORICO)  == 0) {
             opcoesAtivadas[1] = 1;
         }
-        else if     (strcmp(argv[c],TAMANHO)    == 0) {
+        else if (strcmp(argv[c],TAMANHO)    == 0) {
             opcoesAtivadas[2] = 1;
         }
-        else if    (strcmp(argv[c],LISTA)    == 0) {
+        else if (strcmp(argv[c],LISTA)      == 0) {
             opcoesAtivadas[3] = 1;
         }
-        else if      (strcmp(argv[c],CONTEUDO)     == 0) {
+        else if (strcmp(argv[c],CONTEUDO)   == 0) {
             opcoesAtivadas[4] = 1;
         }
         else {
