@@ -1,56 +1,96 @@
-//  Created by Anderson Bucchianico on 19/03/19.
+/*
+ * Nome:        Comparador > Main.c
+ * Criado por:  Anderson Bucchianico
+ * Data:        19 de março de 2019
+ * Descrição:   Inicio do programa onde fica o fluxo principal,
+                responsável por receber os arquivos, opções do usuário,
+                processar informações e depois exibi-las.
+*/
 
 #include "Main.h"
 
+//Inicio do Programa.
 int main (int argc, char** argv) {
     
-    //usado para medir o tempo de execução do programa
-    clock_t tempoExecucao = clock();
-
-    separador(0,1);
-    printf("Comparador de Arquivos\n\n");
-    
-    int OpcaoSemHex = 0;
-    
-    //verifica quantos parametros foram enviados para o programa
-    switch(argc){
-        case 3:
-            break;
-        case 4:
-            if (strcmp(argv[3],"-x") == 0) {
-                OpcaoSemHex = 1;
-            } else {
-                ajuda();
-            }
-            break;
-        default:
-            ajuda();
-    }
-    
+    int opcoesAtivadas[5];
     //variavel usada como contador para os laços de repetição
     unsigned int c;
+    //cria as variaveis de arquivo
+    FILE *arq[2];
+    //cria o vetor tamanho do Arquivo de 2 posições, guarda o tamanho de cada arquivo
+    unsigned int tamArq[2];
+    //Guarda informações sobre o arquivo
+    struct stat infoArq[2];
+    //aloca espaço na memoria criando vetores dinamicamente para cada arquivo
+    unsigned char* ch1 = NULL;
+    unsigned char* ch2 = NULL;
+    int charDif = 0;
+    float taxaOrig = 0.0;
+    int maiorArq = 0;
+    
+    clock_t tempoDeExecucao = clock();
+
+    separador(0,1);
+    printf("Comparador de Arquivos\n");
+    
+    //verifica quantos parametros foram enviados para o programa
+    if (argc == 1) {
+        sobre();
+    }
+    if (argc < 4) {
+        red();
+        printf("\nERRO:");
+        white();
+        printf(" O número de parâmetros passados é insuficiente, insira pelo menos 4 parâmetros!\n\n");
+        ajuda();
+    }
+    for (c=1; c<argc-2; c++) {
+        if         (strcmp(argv[c],PERMISSOES)  == 0) {
+            opcoesAtivadas[0] = 1;
+        }
+        else if    (strcmp(argv[c],HISTORICO)   == 0) {
+            opcoesAtivadas[1] = 1;
+        }
+        else if     (strcmp(argv[c],TAMANHO)    == 0) {
+            opcoesAtivadas[2] = 1;
+        }
+        else if    (strcmp(argv[c],LISTA)    == 0) {
+            opcoesAtivadas[3] = 1;
+        }
+        else if      (strcmp(argv[c],CONTEUDO)     == 0) {
+            opcoesAtivadas[4] = 1;
+        }
+        else {
+            red();
+            printf("\nERRO:");
+            white();
+            printf(" Os parâmetros passados estão incorretos!\n\n");
+            ajuda();
+        }
+    }
     
     //tenta abrir e informa os arquivos que foram abertos
-    FILE *arq[2]; //cria as variaveis de arquivo
-    for (c=1; c<=2; c++) {
-        if ((arq[c-1] = fopen(argv[c],"r"))) {
-            printf("%dº arquivo: %s \n",c,argv[c]);
+    for (c=0; c<2; c++) {
+        if ((arq[c] = fopen(argv[argc-2+c],"r"))) {
+            printf("%dº arquivo: %s \n",c+1,argv[argc-2+c]);
         } else {
             red();
             printf("\nERRO:");
             white();
-            printf(" Não foi possível localizar o %dº arquivo! Você digitou certo?\n",c);
-            exit(0);
+            printf(" Não foi possível localizar o %dº arquivo! Você digitou certo?\n\n",c+1);
+            ajuda();
         }
     }
     
-    //cria o vetor tamanho do Arquivo de 2 posições, guarda o tamanho de cada arquivo
-    unsigned int tamArq[2];
-    struct stat infoArq[2];
-    
-    for(c=0; c<2; c++){ // pega o tamanho do arquivo
-        if (stat(argv[c+1],&infoArq[c]) == 0) {
+    // pega o tamanho do arquivo
+    for(c=0; c<2; c++){
+        if (stat(argv[argc-2+c],&infoArq[c]) == 0) {
             tamArq[c] = (int) infoArq[c].st_size;
+        } else {
+            red();
+            printf("\nERRO:");
+            white();
+            printf(" Não foi possível obter informações do %dº arquivo!\n\n",c+1);
         }
     }
     
@@ -64,177 +104,67 @@ int main (int argc, char** argv) {
     }
     
     //se os arquivos forem iguais ao serem comparados
-    if ((strcmp(argv[1],argv[2])) == 0) {
+    if ((strcmp(argv[argc+1],argv[argc+2])) == 0) {
         yellow();
         printf("\nAVISO: ");
         white();
         printf("Você está pedido para comparar arquivos iguais que possuem o mesmo nome e caminho, logicamente o resultado será zero.\n");
     }
     
-    //Mostra e compara as permissões de arquivo
-    char words[4][5] = {
-        {'r','e','a','d','\0'},
-        {'w','r','t','e','\0'},
-        {'e','x','e','c','\0'},
-        {' ','-','-',' ','\0'},
-    };
-    printf("\nPermissões dos Arquivos: \n");
-    printf("           ┌--------------------┬--------------------┐\n");
-    printf("           |     1º Arquivo     |     2º Arquivo     |\n");
-    printf("┌----------┼--------------------┼--------------------┤\n");
-    printf("| Usuario  |   ");
-    for (c=0; c<2; c++) {
-        printf( "%s ", (infoArq[c].st_mode & S_IRUSR) ? words[0] : words[3]);
-        printf( "%s ", (infoArq[c].st_mode & S_IWUSR) ? words[1] : words[3]);
-        printf( "%s ", (infoArq[c].st_mode & S_IXUSR) ? words[2] : words[3]);
-        printf("  |   ");
-    }
-    printf("\n| Grupo    |   ");
-    for (c=0; c<2; c++) {
-        printf( "%s ", (infoArq[c].st_mode & S_IRGRP) ? words[0] : words[3]);
-        printf( "%s ", (infoArq[c].st_mode & S_IWGRP) ? words[1] : words[3]);
-        printf( "%s ", (infoArq[c].st_mode & S_IXGRP) ? words[2] : words[3]);
-        printf("  |   ");
-    }
-    printf("\n| Outros   |   ");
-    for (c=0; c<2; c++) {
-        printf( "%s ", (infoArq[c].st_mode & S_IROTH) ? words[0] : words[3]);
-        printf( "%s ", (infoArq[c].st_mode & S_IWOTH) ? words[1] : words[3]);
-        printf( "%s ", (infoArq[c].st_mode & S_IXOTH) ? words[2] : words[3]);
-        printf("  |   ");
-    }
-    printf("\n└----------┴--------------------┴--------------------┘\n");
-    
-    char data[10];
-    //Mostra e compara datas de criação, modificação e último acesso
-    printf("\nHistórico dos Arquivos:\n");
-    printf("           ┌--------------------┬--------------------┐\n");
-    printf("           |     1º Arquivo     |     2º Arquivo     |\n");
-    printf("┌----------┼--------------------┼--------------------┤\n");
-    printf("| Criado   | ");
-    for (c=0; c<2; c++) {
-        strftime(data, 20, "%d/%m/%y  %H:%M:%S", localtime(&(infoArq[c].st_birthtime)));
-        printf("%s | ",data);
-    }
-    printf("\n| Acessado | ");
-    for (c=0; c<2; c++) {
-        strftime(data, 20, "%d/%m/%y  %H:%M:%S", localtime(&(infoArq[c].st_atime)));
-        printf("%s | ",data);
-    }
-    printf("\n| Alterado | ");
-    for (c=0; c<2; c++) {
-        strftime(data, 20, "%d/%m/%y  %H:%M:%S", localtime(&(infoArq[c].st_mtime)));
-        printf("%s | ",data);
-    }
-    printf("\n└----------┴--------------------┴--------------------┘\n");
-    
-    //deixa o 1º arquivo como sendo o maior em tamanho
-    int maiorArquivo = 1;
-    if (tamArq[1] > tamArq[0]) {
-        maiorArquivo = 2;
-        tamArq[0] += tamArq[1];
-        tamArq[1] = tamArq[0] - tamArq[1];
-        tamArq[0] -= tamArq[1];
-    }
-    
-    //informa o tamanho dos arquivos
-    printf("\nTamanho dos arquivos:\n");
-    printf("┌--------------┬-------------------------┐\n");
-    if (maiorArquivo == 2) {
-        printf("|  2º Arquivo  | ");
-        espacamento(tamArq[0], 16);
-        printf(" %d bytes |\n",tamArq[0]);
+    if (opcoesAtivadas[3] == 1 || opcoesAtivadas[4] == 1) {
+        ch1 = (unsigned char*) malloc(tamArq[0] * sizeof(char));
+        ch2 = (unsigned char*) malloc(tamArq[1] * sizeof(char));
         
-        printf("|  1º Arquivo  | ");
-        espacamento(tamArq[1], 16);
-        printf(" %d bytes |\n",tamArq[1]);
-    } else {
-        printf("|  1º Arquivo  | ");
-        espacamento(tamArq[0], 16);
-        printf(" %d bytes |\n",tamArq[0]);
+        //preenche o 1º array criado anteriormente
+        for(c=0; c<tamArq[0]; c++){
+            ch1[c] = fgetc(arq[0]);
+        }
+        //preenche o 2º array
+        for(c=0; c<tamArq[1]; c++){
+            ch2[c] = fgetc(arq[1]);
+        }
         
-        printf("|  2º Arquivo  | ");
-        espacamento(tamArq[1], 16);
-        printf(" %d bytes |\n",tamArq[1]);
-    }
-    printf("|  Diferença   | ");
-    espacamento(tamArq[0] - tamArq[1], 16);
-    printf(" %d bytes |\n",negToPosi(tamArq[0] - tamArq[1]));
-    
-    printf("├--------------┴-------------------------┤\n");
-    if (tamArq[0] == tamArq[1]) {
-        printf("|  Os arquivos possuem o mesmo tamanho!  |\n");
-    } else {
-        printf("|  Os arquivos têm tamanhos diferentes!  |\n");
-    }
-    printf("└----------------------------------------┘\n");
-    
-    //aloca espaço na memoria criando vetores dinamicamente para cada arquivo
-    unsigned char* ch1 = (unsigned char*) malloc(tamArq[0] * sizeof(char));
-    unsigned char* ch2 = (unsigned char*) malloc(tamArq[1] * sizeof(char));
-    
-    //preenche o 1º array criado anteriormente
-    for(c=0; c<tamArq[0]; c++){
-        ch1[c] = fgetc(arq[0]);
-    }
-    //preenche o 2º array
-    for(c=0; c<tamArq[1]; c++){
-        ch2[c] = fgetc(arq[1]);
+        if (tamArq[1] > tamArq[0]) {
+            maiorArq = 1;
+        }
+        
+        //Faz a contagem de quantos caracteres são diferentes
+        for (c=0; c<tamArq[maiorArq]; c++) {
+            if (ch1[c] != ch2[c]) {
+                charDif++;
+            }
+        }
+        
+        taxaOrig = 100-((float)(charDif*100)/tamArq[0]);
     }
     
     //fechando os arquivos pois não será mais usado
     fclose(arq[0]);
     fclose(arq[1]);
     
-    printf("\nConteúdo dos Arquivos:\n");
-    
-    //verificando se são iguais
-    int charDif = 0;
-    if (OpcaoSemHex == 0) {
-        //imprime o cabeçalho da tabela
-        printf("┌--------------┬------------┬------------┐\n");
-        printf("|   Endereço   | 1º Arquivo | 2º Arquivo |\n");
-        printf("├--------------┼------------┼------------┤\n");
-        for (c=0; c<tamArq[0]; c++) {
-            if (ch1[c] != ch2[c]) {
-                charDif++;
-                printf("|  0x%s  ",decToHex(c));
-                printf("|     %s     ",&decToHex(ch1[c]) [6]); //retorna o caractere formatado a partir da 6ª posição
-                printf("|     %s     |\n",&decToHex(ch2[c]) [6]);
-            }
-        }
-        printf("├--------------┴------------┴------------┤\n");
-    } else {
-        for (c=0; c<tamArq[1]; c++) {
-            if (ch1[c] != ch2[c]) {
-                charDif++;
-            }
-        }
-        printf("┌----------------------------------------┐\n");
+    if (opcoesAtivadas[0] == 1) {
+        exibirPermissoes(infoArq);
     }
-    //Imprime o rodapé
-    printf("| Caracteres Idênticos: ");
-    espacamento(tamArq[0]-charDif, 16);
-    printf("%i |\n",tamArq[0]-charDif);
-    
-    printf("| Caracteres Diferentes: ");
-    espacamento(charDif, 15);
-    printf("%i | \n", charDif);
-    
-    printf("| Taxa de Originalidade: ");
-    float txOrig = 100-((float)(charDif*100)/tamArq[1]);
-    espacamento(txOrig, 10);
-    printf("%.3f%c |\n",negToPosf(txOrig),37);
-    
-    printf("└----------------------------------------┘\n");
+    if (opcoesAtivadas[1] == 1) {
+        exibirHistorico(infoArq);
+    }
+    if (opcoesAtivadas[2] == 1) {
+        exibirTamanho(tamArq);
+    }
+    if (opcoesAtivadas[3] == 1) {
+        exibirListaChar(tamArq,ch1,ch2);
+    }
+    if (opcoesAtivadas[4] == 1) {
+        exibirConteudo(tamArq,charDif,taxaOrig);
+    }
     
     printf("Status: ");
     green();
     printf("Finalizado!\n");
     white();
     
-    tempoExecucao = clock() - tempoExecucao;
-    printf("Tempo de execução: %.2f segundos\n",( (double) tempoExecucao ) / CLOCKS_PER_SEC );
+    tempoDeExecucao = clock() - tempoDeExecucao;
+    printf("Tempo de execução: %.2f segundos\n",( (double) tempoDeExecucao ) / CLOCKS_PER_SEC );
     
     separador(0, 1);
     

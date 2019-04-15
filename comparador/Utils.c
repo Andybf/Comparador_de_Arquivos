@@ -1,29 +1,34 @@
-//
-//  Utils.c
-//  comparador
-//
-//  Created by Anderson Bucchianico on 24/03/19.
-//  Copyright © 2019 Anderson Bucchianico. All rights reserved.
-//
-
-//Biblioteca de funções pessoal, usada no programa principal.
+/*
+ * Nome:        Comparador > Utils.c
+ * Criado por:  Anderson Bucchianico
+ * Data:        24 de março de 2019
+ * Descrição:   Biblioteca de funções pessoal, usada no programa principal.
+ */
 
 #include "Utils.h"
 
 void ajuda(){
-    printf("Escrito totalmente em C por:\n    Anderson Bucchianico\n\n");
+    printf("    Ajuda: \n");
+    printf("    ./comparador [ -p -h -t -c -l ] arquivo.ext arquivo2.ext\n\n");
     
-    printf("Versão:\n    1.1 - 13 de abril de 2019\n\n");
+    printf("    -p    Exibe tabela de permissões\n");
+    printf("    -h    Exibe tabela de histórico\n");
+    printf("    -t    Exibe tabela de tamanhos\n");
+    printf("    -l    Exibe a lista de caracteres diferentes\n");
+    printf("    -c    Exibe tabela de caracteres diferentes\n\n");
     
-    yellow();
-    printf("Uso incorreto do programa detectado!\n");
-    white();
-    printf("    Exemplo: \n");
-    printf("    ./comparador /pasta1/pasta2/arquivo.ext /pasta3/pasta4/arquivo2.ext [ -x ]\n\n");
+    printf("Tamanho máximo permitido por arquivo: %ld bytes (4 Gigabytes).\n",MAXBYTES);
+    printf("Você pode arrastar e soltar os arquivos para dentro do terminal para adicioná-los.\n");
+    separador(0,1);
+    exit(0);
+}
+
+void sobre () {
+    printf("\nDesenvolvido por:\n    Anderson Bucchianico\n\n");
     
-    printf(" - Tamanho máximo permitido por arquivo: %ld bytes (4 Gigabytes).\n",MAXBYTES);
-    printf(" - Você pode arrastar e soltar os arquivos para dentro do terminal para adicioná-los.\n");
-    printf(" - Caso não queira ver a lista de caracteres diferentes use a opção -x no final do comando.\n");
+    printf("E-mail:\n    anderson584bf@gmail.com\n\n");
+    
+    printf("Versão:\n    1.2 - 15 de abril de 2019\n");
     separador(0,1);
     exit(0);
 }
@@ -39,14 +44,14 @@ int count(int num){
 }
 
 //Transforma o numero negativo para positivo
-int negToPosi(int num){ //para numeros inteiros
+int negToPosi(int num){
     if (num < 0){
         return num -= num + num;
     } else {
         return num;
     }
 }
-float negToPosf(float num) { //para numeros com casas decimais
+float negToPosf(float num) {
     if (num < 0){
         return num -= num + num;
     } else {
@@ -66,20 +71,29 @@ void espacamento(int numero, int espacos){
 
 //aplica um separador no console
 void separador (int start, int end) {
+    int c;
+    int colunas;
     //coletando informações sobre a quantidade de colunas no bash
     struct winsize width;
+    
     ioctl(0, TIOCGWINSZ, &width);
-    int col = width.ws_col /2;
-    //restrições
-    if (col == 0) { col = 40; }
-    if (col > 60) { col = 60; }
-    //aplica uma quebra de linha no começo
-    if (start == 1) { printf("\n"); }
-    int c;
-    for (c=1; c<=col; c++) { //aplica o separador
+    colunas = width.ws_col /2;
+    
+    if (colunas == 0) {
+        colunas = 40;
+    }
+    if (colunas > 60) {
+        colunas = 60;
+    }
+    if (start == 1) {
+        printf("\n");
+    }
+    for (c=1; c<=colunas; c++) {
         printf("- ");;
     }
-    if (end == 1) { printf("\n"); }
+    if (end == 1) {
+        printf("\n");
+    }
 }
 
 //Transforma um numero decimal para hexadecimal, suporta numeros de até 2^32
@@ -88,34 +102,50 @@ unsigned char* decToHex(unsigned int numero) {
     static unsigned char hex[9];
     unsigned int resto[8];
     unsigned int result;
+    int c;
+    
     result = numero;
     
-    for (int p=7; p>=0; p--) {
-        resto[p] = (int) result % 16; //resto da divisão por 16
-        result   = (int) result / 16; //dividido por 16
+    for (c=7; c>=0; c--) {
+        resto[c] = (int) result % 16;
+        result   = (int) result / 16;
     }
     
-    for (int c=7; c>=0; c--) {// este for tem que se repetir quatro vezes apenas.
+    for (c=7; c>=0; c--) {
         switch (resto[c]) {
-            case 0:  hex[c] = '0'; break;
-            case 1:  hex[c] = '1'; break;
-            case 2:  hex[c] = '2'; break;
-            case 3:  hex[c] = '3'; break;
-            case 4:  hex[c] = '4'; break;
-            case 5:  hex[c] = '5'; break;
-            case 6:  hex[c] = '6'; break;
-            case 7:  hex[c] = '7'; break;
-            case 8:  hex[c] = '8'; break;
-            case 9:  hex[c] = '9'; break;
-            case 10: hex[c] = 'A'; break;
-            case 11: hex[c] = 'B'; break;
-            case 12: hex[c] = 'C'; break;
-            case 13: hex[c] = 'D'; break;
-            case 14: hex[c] = 'E'; break;
-            case 15: hex[c] = 'F'; break;
+            case 0:  hex[c] = '0';
+                break;
+            case 1:  hex[c] = '1';
+                break;
+            case 2:  hex[c] = '2';
+                break;
+            case 3:  hex[c] = '3';
+                break;
+            case 4:  hex[c] = '4';
+                break;
+            case 5:  hex[c] = '5';
+                break;
+            case 6:  hex[c] = '6';
+                break;
+            case 7:  hex[c] = '7';
+                break;
+            case 8:  hex[c] = '8';
+                break;
+            case 9:  hex[c] = '9';
+                break;
+            case 10: hex[c] = 'A';
+                break;
+            case 11: hex[c] = 'B';
+                break;
+            case 12: hex[c] = 'C';
+                break;
+            case 13: hex[c] = 'D';
+                break;
+            case 14: hex[c] = 'E';
+                break;
+            case 15: hex[c] = 'F';
+                break;
         }
     }
     return hex;
 }
-
-

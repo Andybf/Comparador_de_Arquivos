@@ -1,12 +1,15 @@
-//
-//  Colors.c
-//  comparador
-//
-//  Created by Anderson Bucchianico on 24/03/19.
-//  Copyright © 2019 Anderson Bucchianico. All rights reserved.
-//
+/*
+ * Nome:        Comparador > Colors.c
+ * Criado por:  Anderson Bucchianico
+ * Data:        24 de março de 2019
+ * Descrição:   Biblioteca de cores e efeitos gráficos para o terminal
+ */
 
 #include "Colors.h"
+
+void black(){
+    printf("\033[1;30m");
+}
 
 void red(){
     printf("\033[1;31m");

@@ -1,2 +1,3 @@
 all:
-	clang main.c Utils.c Colors.c -o comparador
+
+	clang Main.c Exibicoes.c Utils.c Colors.c -o comparador

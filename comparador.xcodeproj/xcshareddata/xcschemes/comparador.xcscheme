@@ -63,20 +63,40 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "/a/OlandEFI.rom"
+            argument = "-p"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "/a/OlandUEFI.rom"
+            argument = "-l"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-h"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "-x"
+            argument = "-t"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-c"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "/a/OlandOr2.rom"
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "/a/B360MD3H.F2"
+            argument = "/a/OlandOr3.rom"
             isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "/a/Electra-1.2.6.ipa"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "/a/Electra-1.2.7.ipa"
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>

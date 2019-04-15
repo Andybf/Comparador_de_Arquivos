@@ -1,4 +1,12 @@
-//  Created by Anderson Bucchianico on 19/03/19.
+/*
+ * Nome:        Comparador > Main.h
+ * Criado por:  Anderson Bucchianico
+ * Data:        19 de março de 2019
+ * Descrição:   Inicio do programa onde fica o fluxo principal,
+                responsável por receber os arquivos, opções do usuário,
+                processar informações e depois exibi-las.
+ */
+
 
 #ifndef Main_h
 #define Main_h
@@ -7,32 +15,19 @@
 #include <stdio.h>      // Biblioteca para E/S
 #include <string.h>     // Manipulação de Strings
 #include <time.h>       // Usado para contar o tempo de execução
-#include <sys/types.h>
-#include <fcntl.h>
-#include <sys/mman.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <locale.h>
+
+//Definição de bibliotecas pessoias
+#include "Utils.h"
+#include "Colors.h"
+#include "Exibicoes.h"
 
 //Variaveis macro
 #define MAXBYTES 4294967295
 
-//Definição de funções da biblioteca Utils
-void            ajuda        (void);
-int             count        (int);
-int             negToPosi    (int);
-float           negToPosf    (float);
-void            separador    (int,int);
-void            espacamento  (int,int);
-unsigned char*  decToHex     (unsigned int);
-
-//Definição de cores
-void red(void);
-void yellow(void);
-void green(void);
-void blue(void);
-void white(void);
+#define PERMISSOES       "-p"
+#define HISTORICO        "-h"
+#define TAMANHO          "-t"
+#define LISTA            "-l"
+#define CONTEUDO         "-c"
 
 #endif /* comparador_h */
